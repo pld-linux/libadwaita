@@ -6,26 +6,28 @@ Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
 # meson.build /version:
+# (now it's 1.0.0-alpha.2, but keep 1.1.0 to avoid epoch bumps)
 Version:	1.1.0
 # not released yet
-%define	gitref	f7e47528c90a44066922ff998e4499af8c85554f
-%define	snap	20210507
+%define	gitref	810ff7937a299e4822074bfa1381bec910535823
+%define	snap	20210927
 Release:	0.%{snap}.1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://gitlab.gnome.org/GNOME/libadwaita/-/tags
 Source0:	https://gitlab.gnome.org/GNOME/libadwaita/-/archive/%{gitref}/%{name}-%{gitref}.tar.bz2
-# Source0-md5:	ce86720130cad4e74ff3111cd62ae22b
+# Source0-md5:	4eb4e19ae41154851c4204b93baab478
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
 BuildRequires:	glib2-devel >= 1:2.44
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gtk-doc}
 BuildRequires:	gtk4-devel >= 4.0
-BuildRequires:	meson >= 0.49.0
+BuildRequires:	meson >= 0.53.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	sassc
 # vala with gtk4 bindings
 BuildRequires:	vala >= 2:0.44
 Requires:	glib2 >= 1:2.44
@@ -92,6 +94,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
+%if %{with apidocs}
+# FIXME: where to package gi-docgen generated docs?
+install -d $RPM_BUILD_ROOT%{_gtkdocdir}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/libadwaita-1 $RPM_BUILD_ROOT%{_gtkdocdir}
+%endif
+
 %find_lang %{name}
 
 %clean
@@ -105,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS README.md
 %attr(755,root,root) %{_libdir}/libadwaita-1.so.0
 %{_libdir}/girepository-1.0/Adw-1.typelib
+# should belong to gtk4?
+%dir %{_libdir}/gtk-4.0/inspector
+%attr(755,root,root) %{_libdir}/gtk-4.0/inspector/libadwaita-inspector-module1.so*
 
 %files devel
 %defattr(644,root,root,755)
