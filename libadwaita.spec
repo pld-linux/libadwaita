@@ -5,32 +5,30 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-# meson.build /version:
-# (now it's 1.0.0-alpha.2, but keep 1.1.0 to avoid epoch bumps)
 Version:	1.1.0
-# not released yet
-%define	gitref	810ff7937a299e4822074bfa1381bec910535823
-%define	snap	20210927
-Release:	0.%{snap}.1
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-#Source0Download: https://gitlab.gnome.org/GNOME/libadwaita/-/tags
-Source0:	https://gitlab.gnome.org/GNOME/libadwaita/-/archive/%{gitref}/%{name}-%{gitref}.tar.bz2
-# Source0-md5:	4eb4e19ae41154851c4204b93baab478
+Source0:	https://download.gnome.org/sources/libadwaita/1.1/%{name}-%{version}.tar.xz
+# Source0-md5:	5d4d710cd9fb4f789fa5d8c99c659f3a
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
-BuildRequires:	glib2-devel >= 1:2.44
+BuildRequires:	fribidi-devel
+BuildRequires:	glib2-devel >= 1:2.66
 BuildRequires:	gobject-introspection-devel
-%{?with_apidocs:BuildRequires:	gtk-doc}
-BuildRequires:	gtk4-devel >= 4.0
-BuildRequires:	meson >= 0.53.0
+%{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
+BuildRequires:	gtk4-devel >= 4.5.0
+BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	sassc
+BuildRequires:	tar >= 1:1.22
 # vala with gtk4 bindings
 BuildRequires:	vala >= 2:0.44
-Requires:	glib2 >= 1:2.44
+BuildRequires:	xz
+Requires:	glib2 >= 1:2.66
+Requires:	gtk4 >= 4.5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,13 +44,25 @@ Summary:	Header files for Adwaita library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Adwaita
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk4-devel >= 4.0
+Requires:	gtk4-devel >= 4.5.0
 
 %description devel
 Header files for Adwaita library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Adwaita.
+
+%package static
+Summary:	Static Adwaita library
+Summary(pl.UTF-8):	Statyczna biblioteka Adwaita
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static Adwaita library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka Adwaita.
 
 %package -n vala-libadwaita
 Summary:	Vala API for Adwaita library
@@ -80,7 +90,7 @@ API documentation for Adwaita library.
 Dokumentacja API biblioteki Adwaita.
 
 %prep
-%setup -q -n %{name}-%{gitref}
+%setup -q
 
 %build
 %meson build \
@@ -113,9 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS README.md
 %attr(755,root,root) %{_libdir}/libadwaita-1.so.0
 %{_libdir}/girepository-1.0/Adw-1.typelib
-# should belong to gtk4?
-%dir %{_libdir}/gtk-4.0/inspector
-%attr(755,root,root) %{_libdir}/gtk-4.0/inspector/libadwaita-inspector-module1.so*
 
 %files devel
 %defattr(644,root,root,755)
@@ -123,6 +130,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libadwaita-1
 %{_datadir}/gir-1.0/Adw-1.gir
 %{_pkgconfigdir}/libadwaita-1.pc
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libadwaita-1.a
 
 %files -n vala-libadwaita
 %defattr(644,root,root,755)
