@@ -5,12 +5,12 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-Version:	1.1.2
+Version:	1.1.3
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libadwaita/1.1/%{name}-%{version}.tar.xz
-# Source0-md5:	2d43473db5bde1fac59f9dd5602c80ed
+# Source0-md5:	b5c3d0dd2af00d067e9a5123254d954a
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
 BuildRequires:	fribidi-devel
 BuildRequires:	glib2-devel >= 1:2.66
