@@ -12,6 +12,7 @@ Group:		Libraries
 Source0:	https://download.gnome.org/sources/libadwaita/1.4/%{name}-%{version}.tar.xz
 # Source0-md5:	45fb9c5bc8ca300d0f3e806733123f00
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
+BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
 BuildRequires:	glib2-devel >= 1:2.76.0
 BuildRequires:	gobject-introspection-devel
