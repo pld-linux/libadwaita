@@ -5,19 +5,19 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-Version:	1.4.4
-Release:	2
+Version:	1.5.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/libadwaita/1.4/%{name}-%{version}.tar.xz
-# Source0-md5:	9ae241b4f893e4e51a06a01b70335563
+Source0:	https://download.gnome.org/sources/libadwaita/1.5/%{name}-%{version}.tar.xz
+# Source0-md5:	71d5d50fc8f36298ef7393b4010baf68
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
 BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
 BuildRequires:	glib2-devel >= 1:2.76.0
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
-BuildRequires:	gtk4-devel >= 4.11.3
+BuildRequires:	gtk4-devel >= 4.13.4
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
@@ -29,7 +29,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.44
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.76.0
-Requires:	gtk4 >= 4.11.3
+Requires:	gtk4 >= 4.13.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,7 +47,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	fribidi-devel
 Requires:	glib2-devel >= 1:2.76.0
-Requires:	gtk4-devel >= 4.11.3
+Requires:	gtk4-devel >= 4.13.4
 
 %description devel
 Header files for Adwaita library.
