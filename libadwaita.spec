@@ -5,19 +5,19 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-Version:	1.5.3
+Version:	1.6.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/libadwaita/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	9be9ebe76f086a8535ff30918926dd07
+Source0:	https://download.gnome.org/sources/libadwaita/1.6/%{name}-%{version}.tar.xz
+# Source0-md5:	3c92480d21b64d0a1a9cdbb75e39b237
 URL:		https://gitlab.gnome.org/GNOME/libadwaita
 BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
 BuildRequires:	glib2-devel >= 1:2.76.0
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
-BuildRequires:	gtk4-devel >= 4.13.4
+BuildRequires:	gtk4-devel >= 4.15.2
 BuildRequires:	meson >= 0.59.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
@@ -29,7 +29,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala >= 2:0.44
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.76.0
-Requires:	gtk4 >= 4.13.4
+Requires:	gtk4 >= 4.15.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,7 +47,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	fribidi-devel
 Requires:	glib2-devel >= 1:2.76.0
-Requires:	gtk4-devel >= 4.13.4
+Requires:	gtk4-devel >= 4.15.2
 
 %description devel
 Header files for Adwaita library.
@@ -124,11 +124,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README.md
 %attr(755,root,root) %{_libdir}/libadwaita-1.so.0
+%attr(755,root,root) %{_libdir}/libadwaita-1-internal.so.0
 %{_libdir}/girepository-1.0/Adw-1.typelib
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libadwaita-1.so
+%attr(755,root,root) %{_libdir}/libadwaita-1-internal.so
 %{_includedir}/libadwaita-1
 %{_datadir}/gir-1.0/Adw-1.gir
 %{_pkgconfigdir}/libadwaita-1.pc
@@ -136,6 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libadwaita-1.a
+%{_libdir}/libadwaita-1-internal.a
 
 %files -n vala-libadwaita
 %defattr(644,root,root,755)
