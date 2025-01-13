@@ -14,6 +14,7 @@ Source0:	https://download.gnome.org/sources/libadwaita/1.6/%{name}-%{version}.ta
 URL:		https://gnome.pages.gitlab.gnome.org/libadwaita/
 BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.76.0
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
