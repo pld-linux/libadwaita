@@ -1,6 +1,7 @@
 #
 # Conditional_build:
-%bcond_without	apidocs	# gi-doc API documentation
+%bcond_without	apidocs		# gi-doc API documentation
+%bcond_without	static_libs	# static libraries
 
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
@@ -98,6 +99,7 @@ Dokumentacja API biblioteki Adwaita.
 
 %build
 %meson build \
+	%{!?with_static_libs:--default-library=shared} \
 	-Dexamples=false \
 	%{?with_apidocs:-Dgtk_doc=true}
 
@@ -136,10 +138,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gir-1.0/Adw-1.gir
 %{_pkgconfigdir}/libadwaita-1.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libadwaita-1.a
 %{_libdir}/libadwaita-1-internal.a
+%endif
 
 %files -n vala-libadwaita
 %defattr(644,root,root,755)
