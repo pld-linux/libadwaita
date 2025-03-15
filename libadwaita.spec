@@ -6,32 +6,32 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-Version:	1.6.4
+Version:	1.7.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/libadwaita/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	8c8fe1e64c361eb5a84d60f61147fbf9
+Source0:	https://download.gnome.org/sources/libadwaita/1.7/%{name}-%{version}.tar.xz
+# Source0-md5:	f10aaac91bcfddac3ebbb4855985855f
 URL:		https://gnome.pages.gitlab.gnome.org/libadwaita/
 BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.76.0
+BuildRequires:	glib2-devel >= 1:2.80.0
 BuildRequires:	gobject-introspection-devel
 %{?with_apidocs:BuildRequires:	gi-docgen >= 2021.1}
-BuildRequires:	gtk4-devel >= 4.15.2
-BuildRequires:	meson >= 0.59.0
+BuildRequires:	gtk4-devel >= 4.17.5
+BuildRequires:	meson >= 0.63.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.029
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sassc
 BuildRequires:	tar >= 1:1.22
 # vala with gtk4 bindings
 BuildRequires:	vala >= 2:0.44
 BuildRequires:	xz
-Requires:	glib2 >= 1:2.76.0
-Requires:	gtk4 >= 4.15.2
+Requires:	glib2 >= 1:2.80.0
+Requires:	gtk4 >= 4.17.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,8 +48,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Adwaita
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	fribidi-devel
-Requires:	glib2-devel >= 1:2.76.0
-Requires:	gtk4-devel >= 4.15.2
+Requires:	glib2-devel >= 1:2.80.0
+Requires:	gtk4-devel >= 4.17.5
 
 %description devel
 Header files for Adwaita library.
@@ -98,17 +98,18 @@ Dokumentacja API biblioteki Adwaita.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared} \
 	-Dexamples=false \
-	%{?with_apidocs:-Dgtk_doc=true}
+	%{?with_apidocs:-Dgtk_doc=true} \
+	-Dintrospection=enabled
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %if %{with apidocs}
 install -d $RPM_BUILD_ROOT%{_gidocdir}
@@ -127,13 +128,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README.md
 %attr(755,root,root) %{_libdir}/libadwaita-1.so.0
-%attr(755,root,root) %{_libdir}/libadwaita-1-internal.so.0
 %{_libdir}/girepository-1.0/Adw-1.typelib
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libadwaita-1.so
-%attr(755,root,root) %{_libdir}/libadwaita-1-internal.so
 %{_includedir}/libadwaita-1
 %{_datadir}/gir-1.0/Adw-1.gir
 %{_pkgconfigdir}/libadwaita-1.pc
