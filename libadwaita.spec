@@ -6,12 +6,12 @@
 Summary:	Adwaita mobile widgets library
 Summary(pl.UTF-8):	Biblioteka widżetów mobilnych Adwaita
 Name:		libadwaita
-Version:	1.7.6
+Version:	1.7.7
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/libadwaita/1.7/%{name}-%{version}.tar.xz
-# Source0-md5:	b8465c0046767c4004a4660d2e790985
+# Source0-md5:	c0d87d4ea58ecfad98c3aa0887c0fa14
 URL:		https://gnome.pages.gitlab.gnome.org/libadwaita/
 BuildRequires:	AppStream-devel
 BuildRequires:	fribidi-devel
